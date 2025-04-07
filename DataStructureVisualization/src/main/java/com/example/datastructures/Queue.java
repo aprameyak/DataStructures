@@ -7,7 +7,7 @@ public class Queue<T> {
 
     public Queue(int capacity) {
         this.size = size;
-        queue = (T[]) new Object[capacity];
+        this.queue = (T[]) new Object[capacity];
         this.size = 0;
     }   
     public void push(T t) {

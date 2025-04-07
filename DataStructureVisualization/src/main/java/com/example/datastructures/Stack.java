@@ -7,7 +7,7 @@ public class Stack<T> {
 
     public Stack(int capacity) {
         this.size = size;
-        stack = (T[]) new Object[capacity];
+        this.stack = (T[]) new Object[capacity];
         this.size = 0;
     }   
     public void push(T t) {
