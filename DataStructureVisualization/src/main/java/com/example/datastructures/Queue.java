@@ -1,47 +1,37 @@
 package com.example.datastructures;
 
 public class Queue<T> {
-    T[] queue;
-    int size;
-    int capacity;
+    private ArrayList<T> elements;
+    private int frontIndex;
 
-    public Queue(int capacity) {
-        this.size = size;
-        this.queue = (T[]) new Object[capacity];
-        this.size = 0;
-    }   
-    public void push(T t) {
-        if(size == capacity) {
-            resize()
-        }
-        queue[size++] = t;
+    public Queue(int initialCapacity) {
+        this.elements = new ArrayList<>(initialCapacity);
+        this.frontIndex = 0;
     }
-    public T pop() {
-        if(isEmpty()) {
-            throw new IllegalStateException("Queue is empty");
-        }
-        T t = queue[0];
-        size--;
-        for (int i = 0; i < size; i++) {
-            queue[i] = queue[i + 1]; 
-        }
-        return t;
+
+    public void enqueue(T item) {
+        elements.append(item);
     }
-    public T peek() {
+
+    public T dequeue() {
         if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
-        return queue[0]; 
+        return elements.fetch(frontIndex++);
     }
-    public boolean isEmpty() {
-        return size == 0;
-    }   
-    private void resize() {
-        T[] newQueue = (T[]) new Object[2 * capacity]; 
-        for (int i = 0; i < size; i++) {
-            newQueue[i] = queue[i]; 
+
+    public T front() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
         }
-        queue = newQueue; 
-        capacity = 2 * capacity; 
+        return elements.fetch(frontIndex);
+    }
+
+    public boolean isEmpty() {
+        return frontIndex >= elements.getLength();
+    }
+
+    public int size() {
+        return elements.getLength() - frontIndex;
     }
 }

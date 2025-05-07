@@ -1,36 +1,50 @@
 package com.example.datastructures;
 
 public class ArrayList<T> {
-    T[] arrayList;
-    int size;
-    int capacity;
+    private T[] items;
+    private int count;
+    private int maxSize;
+    
+    @SuppressWarnings("unchecked")
+    public ArrayList(int initialCapacity) {
+        maxSize = initialCapacity;
+        items = (T[]) java.util.Arrays.copyOf(new Object[initialCapacity], initialCapacity, Object[].class);
+        count = 0;
+    }
 
-    public ArrayList(int capacity) {
-        this.size = size;
-        this.arrayList = (T[]) new Object[capacity];
-        this.size = 0;
-    }   
-    public void add(T t) {
-        if(size == capacity) {
-            resize();
+    public void append(T element) {
+        if (count == maxSize) {
+            expandCapacity();
         }
-        arrayList[size++] = t;
+        items[count++] = element;
     }
-    public T get(int index) {
-        if(index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+
+    public T fetch(int index) {
+        if (index < 0 || index >= count) {
+            throw new IndexOutOfBoundsException("Invalid index: " + index);
         }
-        return arrayList[index]; 
+        return items[index];
     }
-    public boolean isEmpty() {
-        return size == 0;
-    }   
-    private void resize() {
-        T[] newArrayList = (T[]) new Object[2 * capacity]; 
-        for (int i = 0; i < size; i++) {
-            newArrayList[i] = arrayList[i]; 
+
+    public boolean hasNoElements() {
+        return count == 0;
+    }
+
+    public int getLength() {
+        return count;
+    }
+
+    public int getCapacity() {
+        return maxSize;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void expandCapacity() {
+        T[] larger = (T[]) java.lang.reflect.Array.newInstance(items.getClass().getComponentType(), maxSize * 2);
+        for (int i = 0; i < count; i++) {
+            larger[i] = items[i];
         }
-        arrayList = newArrayList; 
-        capacity = 2 * capacity; 
+        items = larger;
+        maxSize *= 2;
     }
 }

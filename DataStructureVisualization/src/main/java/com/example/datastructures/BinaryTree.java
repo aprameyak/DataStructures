@@ -1,94 +1,78 @@
 package com.example.datastructures;
 
 public class BinaryTree {
-    class Node {
-        Node right;
-        Node left;
-        int key;
-        public Node(int item) {
-            key = item;
-            right = null;
-            left = null;
+    private class TreeNode {
+        int value;
+        TreeNode leftChild, rightChild;
+
+        public TreeNode(int val) {
+            value = val;
+            leftChild = rightChild = null;
         }
     }
 
-    Node root;  
+    private TreeNode entryPoint;
 
     public BinaryTree() {
-        root = null;
+        entryPoint = null;
     }
 
-    public void insert(int key) {
-        if(root == null) {
-            root = new Node(key);
+    public void add(int val) {
+        entryPoint = addNode(entryPoint, val);
+    }
+
+    private TreeNode addNode(TreeNode current, int val) {
+        if (current == null) {
+            return new TreeNode(val);
+        }
+        if (val < current.value) {
+            current.leftChild = addNode(current.leftChild, val);
+        } else if (val > current.value) {
+            current.rightChild = addNode(current.rightChild, val);
+        }
+        return current;
+    }
+
+    public void delete(int val) {
+        entryPoint = deleteNode(entryPoint, val);
+    }
+
+    private TreeNode deleteNode(TreeNode current, int val) {
+        if (current == null) {
+            return null;
+        }
+        if (val < current.value) {
+            current.leftChild = deleteNode(current.leftChild, val);
+        } else if (val > current.value) {
+            current.rightChild = deleteNode(current.rightChild, val);
         } else {
-            Node curr = root;
-            while(curr.left != null && curr.right != null) {
-                if(key < curr.key) {
-                    if(curr.left == null) {
-                        curr.left = new Node(key);
-                        return;
-                    } else {
-                        curr = curr.left;
-                    }
-                } else {
-                    if(curr.right == null) {
-                        curr.right = new Node(key);
-                        return;
-                    } else {
-                        curr = curr.right;
-                    }
-                }
+            if (current.leftChild == null) {
+                return current.rightChild;
+            } else if (current.rightChild == null) {
+                return current.leftChild;
             }
+            current.value = findMin(current.rightChild);
+            current.rightChild = deleteNode(current.rightChild, current.value);
+        }
+        return current;
+    }
+
+    private int findMin(TreeNode node) {
+        while (node.leftChild != null) {
+            node = node.leftChild;
+        }
+        return node.value;
+    }
+
+    private void traverseInOrder(TreeNode node) {
+        if (node != null) {
+            traverseInOrder(node.leftChild);
+            System.out.print(node.value + " ");
+            traverseInOrder(node.rightChild);
         }
     }
 
-    public void remove(int key) {
-        Node curr = root;
-        Node prev = null;
-        while(curr != null && curr.key != key) {
-            prev = curr;
-            if(key < curr.key) {
-                curr = curr.left;
-            } else {
-                curr = curr.right;
-            }
-        }
-        if(curr == null) {
-            return;
-        }
-        if(curr.left == null || curr.right == null) {
-            Node newCurr;
-            if(curr.left == null) {
-                newCurr = curr.right;
-            } else {
-                newCurr = curr.left;
-            }
-            if(prev == null) {
-                root = newCurr;
-            } else {
-                if(curr == prev.left) {
-                    prev.left = newCurr;
-                } else {
-                    prev.right = newCurr;
-                }
-            }
-        } else {
-            Node p = null;
-            Node temp;
-            temp = curr.right;
-            while(temp.left != null) {
-                p = temp;
-                temp = temp.left;
-            }
-            if(p != null) {
-                p.left = temp.right;
-            } else {
-                curr.right = temp.right;
-            }
-            curr.key = temp.key;
-        }
-    
+    public void traverseInOrder() {
+        traverseInOrder(entryPoint);
     }
-
 }
