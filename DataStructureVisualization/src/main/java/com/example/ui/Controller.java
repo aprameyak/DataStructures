@@ -1,9 +1,8 @@
-package com.example.datastructures.ui;
+package com.example.ui;
 
 import com.example.datastructures.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class Controller extends JFrame {
     private JPanel mainPanel;

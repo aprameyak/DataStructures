@@ -1,6 +1,6 @@
 package com.example.datastructures;
 
-import com.example.datastructures.ui.LinkedListVisualizer;
+import com.example.ui.LinkedListVisualizer;
 
 public class DoublyLinkedList<T> {
     private class Node {

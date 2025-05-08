@@ -1,7 +1,7 @@
 package com.example.datastructures;
 
 import java.util.Comparator;
-import com.example.datastructures.ui.LinkedListVisualizer;
+import com.example.ui.LinkedListVisualizer;
 
 public class SingleyLinkedList<T> {
 

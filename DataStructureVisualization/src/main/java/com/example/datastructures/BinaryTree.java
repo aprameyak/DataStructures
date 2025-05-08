@@ -1,6 +1,6 @@
 package com.example.datastructures;
 
-import com.example.datastructures.ui.BinaryTreeVisualizer;
+import com.example.ui.BinaryTreeVisualizer;
 
 public class BinaryTree {
     public class TreeNode {
