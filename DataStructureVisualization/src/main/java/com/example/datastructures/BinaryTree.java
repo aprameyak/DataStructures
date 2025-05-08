@@ -1,7 +1,9 @@
 package com.example.datastructures;
 
+import com.example.datastructures.ui.BinaryTreeVisualizer;
+
 public class BinaryTree {
-    private class TreeNode {
+    public class TreeNode {
         int value;
         TreeNode leftChild, rightChild;
 
@@ -74,5 +76,10 @@ public class BinaryTree {
 
     public void traverseInOrder() {
         traverseInOrder(entryPoint);
+    }
+
+    public void visualize() {
+        BinaryTreeVisualizer visualizer = new BinaryTreeVisualizer(this);
+        visualizer.showVisualization("Binary Tree Visualization");
     }
 }

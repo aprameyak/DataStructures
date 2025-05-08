@@ -1,5 +1,7 @@
 package com.example.datastructures;
 
+import com.example.datastructures.ui.HeapVisualizer;
+
 public class MinHeap {
     private ArrayList<Integer> heap;
 
@@ -74,5 +76,10 @@ public class MinHeap {
             }
         }
         heap = rebuilt;
+    }
+
+    public void visualize() {
+        HeapVisualizer visualizer = new HeapVisualizer(this);
+        visualizer.showVisualization("Min Heap Visualization");
     }
 }

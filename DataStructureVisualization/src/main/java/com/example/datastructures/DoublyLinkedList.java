@@ -1,5 +1,7 @@
 package com.example.datastructures;
 
+import com.example.datastructures.ui.LinkedListVisualizer;
+
 public class DoublyLinkedList<T> {
     private class Node {
         T data;
@@ -77,5 +79,10 @@ public class DoublyLinkedList<T> {
 
     public int size() {
         return length;
+    }
+
+    public void visualize() {
+        LinkedListVisualizer visualizer = new LinkedListVisualizer(this);
+        visualizer.showVisualization("Doubly Linked List Visualization");
     }
 }

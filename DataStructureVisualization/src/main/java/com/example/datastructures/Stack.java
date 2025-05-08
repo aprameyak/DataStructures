@@ -1,5 +1,7 @@
 package com.example.datastructures;
 
+import com.example.datastructures.ui.StackVisualizer;
+
 public class Stack<T> {
     private ArrayList<T> data;
     private int top;
@@ -35,5 +37,10 @@ public class Stack<T> {
 
     public int size() {
         return top;
+    }
+
+    public void visualize() {
+        StackVisualizer visualizer = new StackVisualizer(this);
+        visualizer.showVisualization("Stack Visualization");
     }
 }

@@ -1,5 +1,7 @@
 package com.example.datastructures;
 
+import com.example.datastructures.ui.QueueVisualizer;
+
 public class Queue<T> {
     private ArrayList<T> elements;
     private int frontIndex;
@@ -33,5 +35,10 @@ public class Queue<T> {
 
     public int size() {
         return elements.getLength() - frontIndex;
+    }
+
+    public void visualize() {
+        QueueVisualizer visualizer = new QueueVisualizer(this);
+        visualizer.showVisualization("Queue Visualization");
     }
 }

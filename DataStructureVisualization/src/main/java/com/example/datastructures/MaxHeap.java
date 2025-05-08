@@ -1,5 +1,7 @@
 package com.example.datastructures;
 
+import com.example.datastructures.ui.HeapVisualizer;
+
 public class MaxHeap {
     private ArrayList<Integer> heap;
 
@@ -70,5 +72,10 @@ public class MaxHeap {
             }
         }
         heap = rebuilt;
+    }
+
+    public void visualize() {
+        HeapVisualizer visualizer = new HeapVisualizer(this);
+        visualizer.showVisualization("Max Heap Visualization");
     }
 }

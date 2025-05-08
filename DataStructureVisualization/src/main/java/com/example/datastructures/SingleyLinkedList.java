@@ -1,6 +1,7 @@
 package com.example.datastructures;
 
 import java.util.Comparator;
+import com.example.datastructures.ui.LinkedListVisualizer;
 
 public class SingleyLinkedList<T> {
 
@@ -122,5 +123,10 @@ public class SingleyLinkedList<T> {
         if (node == null) return;
         fillReversed(node.next, list);
         list.appendToEnd(node.item);
+    }
+
+    public void visualize() {
+        LinkedListVisualizer visualizer = new LinkedListVisualizer(this);
+        visualizer.showVisualization("Singly Linked List Visualization");
     }
 }
