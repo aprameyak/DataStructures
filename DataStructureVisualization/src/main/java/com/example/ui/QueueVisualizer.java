@@ -1,4 +1,4 @@
-package com.example.datastructures.ui;
+package com.example.ui;
 
 import com.example.datastructures.Queue;
 import java.awt.*;

@@ -1,4 +1,6 @@
-package com.example.datastructures;
+package com.example.ui;
+
+import com.example.datastructures.*; 
 
 public class TestVisualization {
     public static void main(String[] args) {

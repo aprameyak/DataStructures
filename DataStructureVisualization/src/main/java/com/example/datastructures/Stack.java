@@ -1,6 +1,6 @@
 package com.example.datastructures;
 
-import com.example.datastructures.ui.StackVisualizer;
+import com.example.ui.StackVisualizer;
 
 public class Stack<T> {
     private ArrayList<T> data;

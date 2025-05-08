@@ -1,6 +1,6 @@
 package com.example.datastructures;
 
-import com.example.datastructures.ui.QueueVisualizer;
+import com.example.ui.QueueVisualizer;
 
 public class Queue<T> {
     private ArrayList<T> elements;

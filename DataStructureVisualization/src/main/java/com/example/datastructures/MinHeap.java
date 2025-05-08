@@ -1,6 +1,6 @@
 package com.example.datastructures;
 
-import com.example.datastructures.ui.HeapVisualizer;
+import com.example.ui.HeapVisualizer;
 
 public class MinHeap {
     private ArrayList<Integer> heap;
