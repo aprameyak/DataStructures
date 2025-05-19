@@ -51,7 +51,6 @@ public class View extends JFrame {
     }
 
     private void setupLayout() {
-        // Control Panel Setup
         controlPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         controlPanel.add(new JLabel("Data Structure:"));
         controlPanel.add(structureSelector);
@@ -62,20 +61,16 @@ public class View extends JFrame {
         controlPanel.add(visualizeButton);
         controlPanel.add(clearButton);
 
-        // Status Panel
         JPanel statusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         statusPanel.add(statusLabel);
 
-        // Visualization Panel
         visualizationPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         visualizationPanel.setBackground(Color.WHITE);
 
-        // Add all panels to main panel
         mainPanel.add(controlPanel, BorderLayout.NORTH);
         mainPanel.add(visualizationPanel, BorderLayout.CENTER);
         mainPanel.add(statusPanel, BorderLayout.SOUTH);
 
-        // Add main panel to frame
         add(mainPanel);
     }
 

@@ -1,6 +1,8 @@
 package com.example.datastructures;
 
 import com.example.ui.BinaryTreeVisualizer;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BinaryTree {
     public class TreeNode {
@@ -27,6 +29,7 @@ public class BinaryTree {
         if (current == null) {
             return new TreeNode(val);
         }
+
         if (val < current.value) {
             current.leftChild = addNode(current.leftChild, val);
         } else if (val > current.value) {
@@ -43,16 +46,20 @@ public class BinaryTree {
         if (current == null) {
             return null;
         }
+
         if (val < current.value) {
             current.leftChild = deleteNode(current.leftChild, val);
         } else if (val > current.value) {
             current.rightChild = deleteNode(current.rightChild, val);
         } else {
+            // Node with only one child or no child
             if (current.leftChild == null) {
                 return current.rightChild;
             } else if (current.rightChild == null) {
                 return current.leftChild;
             }
+
+            // Node with two children: Get the inorder successor (smallest in right subtree)
             current.value = findMin(current.rightChild);
             current.rightChild = deleteNode(current.rightChild, current.value);
         }
@@ -66,16 +73,46 @@ public class BinaryTree {
         return node.value;
     }
 
-    private void traverseInOrder(TreeNode node) {
+    public List<Integer> traverseInOrder() {
+        List<Integer> result = new ArrayList<>();
+        traverseInOrder(entryPoint, result);
+        return result;
+    }
+
+    private void traverseInOrder(TreeNode node, List<Integer> result) {
         if (node != null) {
-            traverseInOrder(node.leftChild);
-            System.out.print(node.value + " ");
-            traverseInOrder(node.rightChild);
+            traverseInOrder(node.leftChild, result);
+            result.add(node.value);
+            traverseInOrder(node.rightChild, result);
         }
     }
 
-    public void traverseInOrder() {
-        traverseInOrder(entryPoint);
+    public List<Integer> traversePreOrder() {
+        List<Integer> result = new ArrayList<>();
+        traversePreOrder(entryPoint, result);
+        return result;
+    }
+
+    private void traversePreOrder(TreeNode node, List<Integer> result) {
+        if (node != null) {
+            result.add(node.value);
+            traversePreOrder(node.leftChild, result);
+            traversePreOrder(node.rightChild, result);
+        }
+    }
+
+    public List<Integer> traversePostOrder() {
+        List<Integer> result = new ArrayList<>();
+        traversePostOrder(entryPoint, result);
+        return result;
+    }
+
+    private void traversePostOrder(TreeNode node, List<Integer> result) {
+        if (node != null) {
+            traversePostOrder(node.leftChild, result);
+            traversePostOrder(node.rightChild, result);
+            result.add(node.value);
+        }
     }
 
     public void visualize() {
@@ -83,3 +120,4 @@ public class BinaryTree {
         visualizer.showVisualization("Binary Tree Visualization");
     }
 }
+

@@ -48,10 +48,8 @@ public class HeapVisualizer extends DataStructureVisualizer {
             int x = startX - (nodesInLevel - 1) * (NODE_RADIUS * 2 + HORIZONTAL_GAP) / 2;
             
             for (int i = 0; i < nodesInLevel && currentIndex < elements.length; i++) {
-                // Draw node
                 drawNode(g2d, x, y, String.valueOf(elements[currentIndex]));
                 
-                // Draw connections to children
                 int leftChildIndex = 2 * currentIndex + 1;
                 int rightChildIndex = 2 * currentIndex + 2;
                 
