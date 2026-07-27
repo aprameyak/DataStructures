@@ -11,6 +11,10 @@ public class Stack<T> {
         top = 0;
     }
 
+    public Stack() {
+        this(16);
+    }
+
     public void push(T value) {
         data.append(value);
         top++;
@@ -37,6 +41,14 @@ public class Stack<T> {
 
     public int size() {
         return top;
+    }
+
+    public Object[] toArray() {
+        Object[] result = new Object[top];
+        for (int i = 0; i < top; i++) {
+            result[i] = data.fetch(i);
+        }
+        return result;
     }
 
     public void visualize() {

@@ -157,8 +157,22 @@ public class RedBlackTree {
         }
     }
 
+    public BinaryTree toBinaryTree() {
+        BinaryTree bt = new BinaryTree();
+        bt.entryPoint = copyNode(bt, root);
+        return bt;
+    }
+
+    private BinaryTree.TreeNode copyNode(BinaryTree bt, TreeNode node) {
+        if (node == null) return null;
+        BinaryTree.TreeNode copy = bt.new TreeNode(node.value);
+        copy.leftChild = copyNode(bt, node.leftChild);
+        copy.rightChild = copyNode(bt, node.rightChild);
+        return copy;
+    }
+
     public void visualize() {
-        BinaryTreeVisualizer visualizer = new BinaryTreeVisualizer(this);
+        BinaryTreeVisualizer visualizer = new BinaryTreeVisualizer(toBinaryTree());
         visualizer.showVisualization("Red-Black Tree Visualization");
     }
 } 

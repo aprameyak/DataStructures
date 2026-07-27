@@ -11,6 +11,10 @@ public class Queue<T> {
         this.frontIndex = 0;
     }
 
+    public Queue() {
+        this(16);
+    }
+
     public void enqueue(T item) {
         elements.append(item);
     }
@@ -35,6 +39,15 @@ public class Queue<T> {
 
     public int size() {
         return elements.getLength() - frontIndex;
+    }
+
+    public Object[] toArray() {
+        int size = elements.getLength() - frontIndex;
+        Object[] result = new Object[size];
+        for (int i = 0; i < size; i++) {
+            result[i] = elements.fetch(frontIndex + i);
+        }
+        return result;
     }
 
     public void visualize() {

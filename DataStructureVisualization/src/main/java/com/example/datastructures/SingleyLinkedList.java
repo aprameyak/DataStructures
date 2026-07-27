@@ -5,17 +5,18 @@ import com.example.ui.LinkedListVisualizer;
 
 public class SingleyLinkedList<T> {
 
-    private class Element {
-        T item;
-        Element next;
+    public class Node {
+        public T data;
+        public Node next;
 
-        Element(T item) {
-            this.item = item;
+        Node(T data) {
+            this.data = data;
             this.next = null;
         }
     }
 
-    private Element first, last;
+    public Node head;
+    private Node last;
     private int count;
 
     public int length() {
@@ -23,9 +24,9 @@ public class SingleyLinkedList<T> {
     }
 
     public SingleyLinkedList<T> appendToEnd(T value) {
-        Element e = new Element(value);
-        if (first == null) {
-            first = last = e;
+        Node e = new Node(value);
+        if (head == null) {
+            head = last = e;
         } else {
             last.next = e;
             last = e;
@@ -35,41 +36,41 @@ public class SingleyLinkedList<T> {
     }
 
     public SingleyLinkedList<T> prependToFront(T value) {
-        Element e = new Element(value);
-        if (first == null) {
-            first = last = e;
+        Node e = new Node(value);
+        if (head == null) {
+            head = last = e;
         } else {
-            e.next = first;
-            first = e;
+            e.next = head;
+            head = e;
         }
         count++;
         return this;
     }
 
     public T firstItem() {
-        return first != null ? first.item : null;
+        return head != null ? head.data : null;
     }
 
     public T lastItem() {
-        return last != null ? last.item : null;
+        return last != null ? last.data : null;
     }
 
     public T removeFirst() {
-        if (first == null) return null;
-        T val = first.item;
-        first = first.next;
+        if (head == null) return null;
+        T val = head.data;
+        head = head.next;
         count--;
-        if (first == null) last = null;
+        if (head == null) last = null;
         return val;
     }
 
     public T removeLast() {
-        if (first == null) return null;
-        T val = last.item;
-        if (first == last) {
-            first = last = null;
+        if (head == null) return null;
+        T val = last.data;
+        if (head == last) {
+            head = last = null;
         } else {
-            Element curr = first;
+            Node curr = head;
             while (curr.next != last) {
                 curr = curr.next;
             }
@@ -81,17 +82,17 @@ public class SingleyLinkedList<T> {
     }
 
     public SingleyLinkedList<T> eliminate(T target, Comparator<T> rule) {
-        while (first != null && rule.compare(first.item, target) == 0) {
-            first = first.next;
+        while (head != null && rule.compare(head.data, target) == 0) {
+            head = head.next;
             count--;
         }
-        if (first == null) {
+        if (head == null) {
             last = null;
             return this;
         }
-        Element curr = first;
+        Node curr = head;
         while (curr.next != null) {
-            if (rule.compare(curr.next.item, target) == 0) {
+            if (rule.compare(curr.next.data, target) == 0) {
                 curr.next = curr.next.next;
                 count--;
                 if (curr.next == null) last = curr;
@@ -103,26 +104,26 @@ public class SingleyLinkedList<T> {
     }
 
     public ArrayList<T> reversedArray() {
-        return buildReverseArray(first);
+        return buildReverseArray(head);
     }
 
-    private ArrayList<T> buildReverseArray(Element node) {
+    private ArrayList<T> buildReverseArray(Node node) {
         if (node == null) return new ArrayList<>(10);
         ArrayList<T> result = buildReverseArray(node.next);
-        result.append(node.item);
+        result.append(node.data);
         return result;
     }
 
     public SingleyLinkedList<T> reversedList() {
         SingleyLinkedList<T> reversed = new SingleyLinkedList<>();
-        fillReversed(first, reversed);
+        fillReversed(head, reversed);
         return reversed;
     }
 
-    private void fillReversed(Element node, SingleyLinkedList<T> list) {
+    private void fillReversed(Node node, SingleyLinkedList<T> list) {
         if (node == null) return;
         fillReversed(node.next, list);
-        list.appendToEnd(node.item);
+        list.appendToEnd(node.data);
     }
 
     public void visualize() {

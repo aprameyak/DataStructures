@@ -90,7 +90,8 @@ public class BinaryTreeVisualizer extends DataStructureVisualizer {
         g2d.drawString(value, x - textWidth/2, y + textHeight/4);
     }
 
-    private void drawLine(Graphics2D g2d, int x1, int y1, int x2, int y2) {
+    @Override
+    protected void drawLine(Graphics2D g2d, int x1, int y1, int x2, int y2) {
         g2d.setColor(LINE_COLOR);
         g2d.setStroke(new BasicStroke(2));
         g2d.drawLine(x1, y1, x2, y2);

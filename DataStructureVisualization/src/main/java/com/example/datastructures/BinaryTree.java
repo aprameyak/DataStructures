@@ -6,8 +6,8 @@ import java.util.List;
 
 public class BinaryTree {
     public class TreeNode {
-        int value;
-        TreeNode leftChild, rightChild;
+        public int value;
+        public TreeNode leftChild, rightChild;
 
         public TreeNode(int val) {
             value = val;
@@ -15,7 +15,7 @@ public class BinaryTree {
         }
     }
 
-    private TreeNode entryPoint;
+    public TreeNode entryPoint;
 
     public BinaryTree() {
         entryPoint = null;

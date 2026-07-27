@@ -9,6 +9,10 @@ public class MinHeap {
         heap = new ArrayList<>(capacity);
     }
 
+    public MinHeap() {
+        this(16);
+    }
+
     public void insert(int value) {
         heap.append(value);
         int index = heap.getLength() - 1;
@@ -76,6 +80,14 @@ public class MinHeap {
             }
         }
         heap = rebuilt;
+    }
+
+    public Object[] toArray() {
+        Object[] result = new Object[heap.getLength()];
+        for (int i = 0; i < heap.getLength(); i++) {
+            result[i] = heap.fetch(i);
+        }
+        return result;
     }
 
     public void visualize() {

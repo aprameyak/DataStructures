@@ -55,4 +55,29 @@ public abstract class DataStructureVisualizer extends JPanel {
         g2d.setColor(LINE_COLOR);
         g2d.drawLine(x1, y1, x2, y2);
     }
+
+    protected void drawArrow(Graphics2D g2d, int x1, int y1, int x2, int y2) {
+        g2d.setColor(LINE_COLOR);
+        g2d.drawLine(x1, y1, x2, y2);
+        int arrowSize = 8;
+        double angle = Math.atan2(y2 - y1, x2 - x1);
+        int ax1 = (int) (x2 - arrowSize * Math.cos(angle - Math.PI / 6));
+        int ay1 = (int) (y2 - arrowSize * Math.sin(angle - Math.PI / 6));
+        int ax2 = (int) (x2 - arrowSize * Math.cos(angle + Math.PI / 6));
+        int ay2 = (int) (y2 - arrowSize * Math.sin(angle + Math.PI / 6));
+        g2d.drawLine(x2, y2, ax1, ay1);
+        g2d.drawLine(x2, y2, ax2, ay2);
+    }
+
+    protected void drawRectangle(Graphics2D g2d, int x, int y, int width, int height, String value) {
+        g2d.setColor(NODE_COLOR);
+        g2d.fillRect(x, y, width, height);
+        g2d.setColor(LINE_COLOR);
+        g2d.drawRect(x, y, width, height);
+        g2d.setColor(TEXT_COLOR);
+        FontMetrics fm = g2d.getFontMetrics();
+        int textWidth = fm.stringWidth(value);
+        int textHeight = fm.getHeight();
+        g2d.drawString(value, x + (width - textWidth) / 2, y + (height + textHeight) / 2 - fm.getDescent());
+    }
 } 

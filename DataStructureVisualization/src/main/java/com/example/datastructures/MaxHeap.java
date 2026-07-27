@@ -9,6 +9,10 @@ public class MaxHeap {
         heap = new ArrayList<>(capacity);
     }
 
+    public MaxHeap() {
+        this(16);
+    }
+
     public void insert(int value) {
         heap.append(value);
         int index = heap.getLength() - 1;
@@ -72,6 +76,14 @@ public class MaxHeap {
             }
         }
         heap = rebuilt;
+    }
+
+    public Object[] toArray() {
+        Object[] result = new Object[heap.getLength()];
+        for (int i = 0; i < heap.getLength(); i++) {
+            result[i] = heap.fetch(i);
+        }
+        return result;
     }
 
     public void visualize() {

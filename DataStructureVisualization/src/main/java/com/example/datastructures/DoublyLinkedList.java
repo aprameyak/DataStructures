@@ -3,16 +3,17 @@ package com.example.datastructures;
 import com.example.ui.LinkedListVisualizer;
 
 public class DoublyLinkedList<T> {
-    private class Node {
-        T data;
-        Node prev, next;
+    public class Node {
+        public T data;
+        public Node prev, next;
 
         Node(T data) {
             this.data = data;
         }
     }
 
-    private Node head, tail;
+    public Node head;
+    private Node tail;
     private int length;
 
     public void addToFront(T value) {
@@ -25,6 +26,10 @@ public class DoublyLinkedList<T> {
             head = node;
         }
         length++;
+    }
+
+    public void appendToEnd(T value) {
+        addToEnd(value);
     }
 
     public void addToEnd(T value) {
