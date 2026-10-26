@@ -49,9 +49,9 @@ public class RedBlackTree {
     }
 
     private void flipColors(TreeNode h) {
-        h.color = RED;
-        h.leftChild.color = BLACK;
-        h.rightChild.color = BLACK;
+        h.color = !h.color;
+        h.leftChild.color = !h.leftChild.color;
+        h.rightChild.color = !h.rightChild.color;
     }
 
     public void add(int val) {
@@ -77,7 +77,18 @@ public class RedBlackTree {
         return current;
     }
 
+    public boolean contains(int val) {
+        TreeNode current = root;
+        while (current != null) {
+            if (val < current.value) current = current.leftChild;
+            else if (val > current.value) current = current.rightChild;
+            else return true;
+        }
+        return false;
+    }
+
     public void delete(int val) {
+        if (!contains(val)) return;
         if (!isRed(root.leftChild) && !isRed(root.rightChild)) root.color = RED;
         root = deleteNode(root, val);
         if (root != null) root.color = BLACK;
@@ -125,7 +136,7 @@ public class RedBlackTree {
     }
 
     private TreeNode balance(TreeNode h) {
-        if (isRed(h.rightChild)) h = rotateLeft(h);
+        if (isRed(h.rightChild) && !isRed(h.leftChild)) h = rotateLeft(h);
         if (isRed(h.leftChild) && isRed(h.leftChild.leftChild)) h = rotateRight(h);
         if (isRed(h.leftChild) && isRed(h.rightChild)) flipColors(h);
         return h;
